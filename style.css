@@ -1,0 +1,110 @@
+body{
+    font-family: 'Muli';
+    font-weight: 300;
+    color: #6891AF;
+    line-height: 28px;
+    letter-spacing: 0.8px;
+    font-size: 18px;
+}
+.container{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 120px;
+    margin: auto;
+    height: 80%;
+    width: 65%;
+    display: flex;
+}
+body h2{
+    /* font-family: 'Raleway'; */
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 20px;
+    text-decoration: underline;
+    color: #597D96;
+}
+
+body h3{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 16px;
+    letter-spacing: 0px;
+    font-style: italic;
+}
+
+body h3 span{
+    float: right;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: 0.8px;
+}
+
+.line span{
+    float: right;
+    font-weight: 300;
+    margin-left: 6px;
+}
+a{
+    color: #6891AF;
+    /* text-decoration: none; */
+    font-weight: 600;
+}
+.nav{
+    margin-top: -60px;
+    margin-right: 80px;
+}
+.nav a{
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.nav ul{
+    list-style: none;
+}
+.projects h2{
+    margin: 0;
+    margin-bottom: 6px;
+    text-decoration: none;
+}
+.project img{
+    width: 560px;
+    box-shadow: 0px 10px 20px rgba(155,155,155,0.16);
+    display: block;
+}
+.project ul{
+    list-style-type:circle;
+}
+.main ul{
+    list-style-type:circle;
+    margin: 6px 0px;
+}
+
+.project:nth-last-child(1){
+    padding-bottom: 40px;
+}
+
+.skill_tb{
+    display: flex;
+}
+
+.skill_tb div{
+    width: 23%;
+    margin-left: 16px;
+}
+
+.main{
+    font-size: 16px;
+    padding-bottom: 40px;
+}
+
+.main > div{
+    margin-top: 46px;
+}
+.main > div:nth-last-child(1){
+    padding-bottom: 60px;
+}
+.test{
+    margin-top: 29px;
+
+}
