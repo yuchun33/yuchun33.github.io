@@ -17,7 +17,7 @@ body{
     display: flex;
 }
 body h2{
-    /* font-family: 'Raleway'; */
+    font-family: 'Raleway';
     font-weight: 600;
     margin-bottom: 4px;
     font-size: 20px;
@@ -53,6 +53,7 @@ a{
 .nav{
     margin-top: -60px;
     margin-right: 80px;
+    position: fixed;
 }
 .nav a{
     text-decoration: none;
@@ -61,6 +62,13 @@ a{
 
 .nav ul{
     list-style: none;
+}
+
+.nav ul li{
+    margin-top: 10px;
+}
+.projects{
+    margin-left: 180px;
 }
 .projects h2{
     margin: 0;
@@ -75,10 +83,6 @@ a{
 .project ul{
     list-style-type:circle;
 }
-.main ul{
-    list-style-type:circle;
-    margin: 6px 0px;
-}
 
 .project:nth-last-child(1){
     padding-bottom: 40px;
@@ -92,12 +96,18 @@ a{
     width: 23%;
     margin-left: 16px;
 }
-
+.intro{
+    margin-left: 180px;
+}
 .main{
     font-size: 16px;
     padding-bottom: 40px;
+    margin-left: 180px;
 }
-
+.main ul{
+    list-style-type:circle;
+    margin: 6px 0px;
+}
 .main > div{
     margin-top: 46px;
 }
