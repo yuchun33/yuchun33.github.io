@@ -104,13 +104,13 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下載 kit-app-template</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/NVIDIA-Omniverse/kit-app-template.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 進入 kit-app-template 資料夾</span></span><br><span class="line"><span class="built_in">cd</span> kit-app-template</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 .repo 產生 application 或 extension</span></span><br><span class="line"><span class="comment"># linux</span></span><br><span class="line">./repo.sh template new</span><br><span class="line"><span class="comment"># window</span></span><br><span class="line">.\repo.bat template new</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../_imgs/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/image.png" alt="image.png"></p>
+<p><img src="/images/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/image.png" alt="image.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 接下來只要把整個 extension 資料夾複製到 /isaac-sim-standalone@4.5.0-rc.36/exts 內就可以在 my-isaacsim.exp.full.kit 內的 [dependencies] 加上</span></span><br><span class="line"><span class="string">&quot;my_company.my_python_ui_extension&quot;</span> = &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>啟動 my-isaac-sim 可以看到建立的 extension。</p>
-<p><img src="/../_imgs/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/image%201.png" alt="image 1.png"></p>
+<p><img src="/images/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/image%201.png" alt="image 1.png"></p>
 <p>如果沒有自動出現可以去 window&#x2F;extensions 內 enabled</p>
-<p><img src="/../_imgs/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/image%202.png" alt="image 2.png"></p>
+<p><img src="/images/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/image%202.png" alt="image 2.png"></p>
 <ul>
 <li>測試用 api 可以觸發產生 cube</li>
 </ul>
@@ -121,7 +121,7 @@
 </ul>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 用 postman 觸發 http<span class="punctuation">:</span><span class="comment">//localhost:8011/mcp/spawn_cube，並且記得設定 body</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hello&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;size&quot;</span><span class="punctuation">:</span> <span class="number">100</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;position&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span><span class="number">0</span><span class="punctuation">,</span><span class="number">0</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/../_imgs/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/GifMaker_20251211164844307.gif" alt="GifMaker_20251211164844307.gif"></p>
+<p><img src="/images/Isaac%20Sim%EF%BC%9A%E4%BD%BF%E7%94%A8%20HTTP%20Request%20(GET!POST)%20%E8%88%87%E5%A0%B4%E6%99%AF%E4%BA%92%E5%8B%95-assets/GifMaker_20251211164844307.gif" alt="GifMaker_20251211164844307.gif"></p>
 <ul>
 <li>如果出現 <code>my_``[company.my](company.my)``_python_ui_extension</code> 匯入錯誤</li>
 </ul>
