@@ -195,7 +195,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-12-16 22:54:50 / Modified: 23:11:19" itemprop="dateCreated datePublished" datetime="2025-12-16T22:54:50+08:00">2025-12-16</time>
+      <time title="Created: 2025-12-16 22:54:50 / Modified: 23:13:23" itemprop="dateCreated datePublished" datetime="2025-12-16T22:54:50+08:00">2025-12-16</time>
     </span>
 
   
@@ -217,10 +217,10 @@
 <li>確保方向一致</li>
 </ol>
 <h3 id="保留一台車"><a href="#保留一台車" class="headerlink" title="保留一台車"></a>保留一台車</h3><ol>
-<li>從 window&#x2F;examples&#x2F;physics examples 中找到內建的 ackermann steering 範例，按下 Load scene 後可以看到有三組沒有車身只有四顆輪子的四輪車。<br><img src="/images/%E5%BB%BA%E7%AB%8B%E5%85%B7%E5%82%99%E7%89%A9%E7%90%86%E5%B1%AC%E6%80%A7%E4%B8%94%E5%8F%AF%E6%96%BC%20Isaac%20Sim%20%E6%B2%BF%E7%94%A8%E7%9A%84%E5%9B%9B%E8%BC%AA%E8%BB%8A%20usda-assets/01.png" alt="image01.png"></li>
-<li>把 car_1 和 car_2 刪除<br><img src="/images/%E5%BB%BA%E7%AB%8B%E5%85%B7%E5%82%99%E7%89%A9%E7%90%86%E5%B1%AC%E6%80%A7%E4%B8%94%E5%8F%AF%E6%96%BC%20Isaac%20Sim%20%E6%B2%BF%E7%94%A8%E7%9A%84%E5%9B%9B%E8%BC%AA%E8%BB%8A%20usda-assets/02.png" alt="image02.png"></li>
-<li>另存成 .usda 檔案 (存在哪裡都可以)<br>![image03.png](&#x2F;images&#x2F;建立具備物理屬性且可於 Isaac Sim 沿用的四輪車 usda&#x2F;03.png)</li>
-<li>用 vscode 打開 (或自己習慣的編輯器)，會看到所有元件的屬性，包含四輪車的。從這個檔案上下左右比對，可以猜出屬性的關聯和綁定關係。<br>![image04.png](&#x2F;images&#x2F;建立具備物理屬性且可於 Isaac Sim 沿用的四輪車 usda&#x2F;04.png)</li>
+<li>從 window&#x2F;examples&#x2F;physics examples 中找到內建的 ackermann steering 範例，按下 Load scene 後可以看到有三組沒有車身只有四顆輪子的四輪車。<br><img src="/images/%E5%BB%BA%E7%AB%8B%E5%85%B7%E5%82%99%E7%89%A9%E7%90%86%E5%B1%AC%E6%80%A7%E4%B8%94%E5%8F%AF%E6%96%BC%20Isaac%20Sim%20%E6%B2%BF%E7%94%A8%E7%9A%84%E5%9B%9B%E8%BC%AA%E8%BB%8A%20usda/01.png" alt="image01.png"></li>
+<li>把 car_1 和 car_2 刪除<br><img src="/images/%E5%BB%BA%E7%AB%8B%E5%85%B7%E5%82%99%E7%89%A9%E7%90%86%E5%B1%AC%E6%80%A7%E4%B8%94%E5%8F%AF%E6%96%BC%20Isaac%20Sim%20%E6%B2%BF%E7%94%A8%E7%9A%84%E5%9B%9B%E8%BC%AA%E8%BB%8A%20usda/02.png" alt="image02.png"></li>
+<li>另存成 .usda 檔案 (存在哪裡都可以)<br><img src="/images/%E5%BB%BA%E7%AB%8B%E5%85%B7%E5%82%99%E7%89%A9%E7%90%86%E5%B1%AC%E6%80%A7%E4%B8%94%E5%8F%AF%E6%96%BC%20Isaac%20Sim%20%E6%B2%BF%E7%94%A8%E7%9A%84%E5%9B%9B%E8%BC%AA%E8%BB%8A%20usda/03.png" alt="image03.png"></li>
+<li>用 vscode 打開 (或自己習慣的編輯器)，會看到所有元件的屬性，包含四輪車的。從這個檔案上下左右比對，可以猜出屬性的關聯和綁定關係。<br><img src="/images/%E5%BB%BA%E7%AB%8B%E5%85%B7%E5%82%99%E7%89%A9%E7%90%86%E5%B1%AC%E6%80%A7%E4%B8%94%E5%8F%AF%E6%96%BC%20Isaac%20Sim%20%E6%B2%BF%E7%94%A8%E7%9A%84%E5%9B%9B%E8%BC%AA%E8%BB%8A%20usda/04.png" alt="image04.png"></li>
 <li>在 isaac sim 開啟新專案，檢查剛剛輸出的 usda 檔案可不可以重新匯入到 isaac sim 的視窗</li>
 </ol>
 <h3 id="方法-a：import-不能用-import-的，不支援-usd-格式"><a href="#方法-a：import-不能用-import-的，不支援-usd-格式" class="headerlink" title="方法 a：import(不能用 import 的，不支援 usd 格式)"></a>方法 a：import(不能用 import 的，不支援 usd 格式)</h3><h3 id="方法-b：open-可以，會跟儲存成-usda-時的狀態一模一樣"><a href="#方法-b：open-可以，會跟儲存成-usda-時的狀態一模一樣" class="headerlink" title="方法 b：open(可以，會跟儲存成 usda 時的狀態一模一樣)"></a>方法 b：open(可以，會跟儲存成 usda 時的狀態一模一樣)</h3><p>![image05.png](&#x2F;images&#x2F;建立具備物理屬性且可於 Isaac Sim 沿用的四輪車 usda&#x2F;05.png)</p>
