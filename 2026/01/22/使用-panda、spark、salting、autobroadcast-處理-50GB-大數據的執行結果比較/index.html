@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://yuchun33.github.io/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-04.png">
 <meta property="og:image" content="https://yuchun33.github.io/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-05.png">
 <meta property="article:published_time" content="2026-01-22T13:28:05.000Z">
-<meta property="article:modified_time" content="2026-01-22T13:44:42.400Z">
+<meta property="article:modified_time" content="2026-01-22T13:46:49.949Z">
 <meta property="article:author" content="Annn">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yuchun33.github.io/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/pandas-oomkilled.png">
@@ -216,7 +216,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-01-22 21:28:05 / Modified: 21:44:42" itemprop="dateCreated datePublished" datetime="2026-01-22T21:28:05+08:00">2026-01-22</time>
+      <time title="Created: 2026-01-22 21:28:05 / Modified: 21:46:49" itemprop="dateCreated datePublished" datetime="2026-01-22T21:28:05+08:00">2026-01-22</time>
     </span>
 
   
@@ -243,7 +243,7 @@
 <h2 id="方法-2：spark"><a href="#方法-2：spark" class="headerlink" title="方法 2：spark"></a>方法 2：spark</h2><p>spark 預設的 autobroadcast 表現最好<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/spark-autobroadcast-01.png" alt="spark-autobroadcast-01.png"></p>
 <h2 id="方法-3：spark-關掉-autobroadcast"><a href="#方法-3：spark-關掉-autobroadcast" class="headerlink" title="方法 3：spark 關掉 autobroadcast"></a>方法 3：spark 關掉 autobroadcast</h2><p>memory 不足，無法完成任務<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/spark-turnoff-autobroadcast-01.png" alt="spark-turnoff-autobroadcast-01.png"><br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/spark-turnoff-autobroadcast-02.png" alt="spark-turnoff-autobroadcast-02.png"></p>
 <h2 id="方法-4：手動-salting"><a href="#方法-4：手動-salting" class="headerlink" title="方法 4：手動 salting"></a>方法 4：手動 salting</h2><p>加入 salting 可以讓數據在有限 memory 中「排隊」分批處理，完成任務<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-01.png" alt="salting-01.png"><br>任務被平均分配到 executor 執行，作業時間平均，但是出現 Memory &amp; Disk Spill<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-02.png" alt="salting-02.png"><br>如果拆成更多 partition，可以降低 Memory &amp; Disk Spill，比如切成 400<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-03.png" alt="salting-03.png"><br>增加 memory 到 5G，沒有 Memory &amp; Disk Spill<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-04.png" alt="salting-04.png"><br>但實際作業時間變長<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-05.png" alt="salting-05.png"></p>
-<p>程式碼 repo：yuchun33&#x2F;data-skew-exp</p>
+<p>程式碼 repo：<a target="_blank" rel="noopener" href="https://github.com/yuchun33/data-skew-exp/tree/main">yuchun33&#x2F;data-skew-exp</a></p>
 <p>DONE.</p>
 
     </div>
