@@ -170,7 +170,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://yuchun33.github.io/2026/01/22/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83%E3%80%82/">
+    <link itemprop="mainEntityOfPage" href="https://yuchun33.github.io/2026/01/22/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -188,7 +188,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/01/22/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83%E3%80%82/" class="post-title-link" itemprop="url">使用 panda、spark、salting、autobroadcast 處理 50GB+ 大數據的執行結果比較。</a>
+          <a href="/2026/01/22/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/" class="post-title-link" itemprop="url">使用 panda、spark、salting、autobroadcast 處理 50GB+ 大數據的執行結果比較。</a>
         </h2>
 
         <div class="post-meta-container">
@@ -198,8 +198,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2026-01-22 21:28:05" itemprop="dateCreated datePublished" datetime="2026-01-22T21:28:05+08:00">2026-01-22</time>
+      <time title="Created: 2026-01-22 21:28:05 / Modified: 21:44:42" itemprop="dateCreated datePublished" datetime="2026-01-22T21:28:05+08:00">2026-01-22</time>
     </span>
 
   
@@ -212,7 +213,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <p>驗證 10G+ 資料集 JOIN 小表的執行結果</p>
+<h1 id="執行環境"><a href="#執行環境" class="headerlink" title="執行環境"></a>執行環境</h1><ul>
+<li><p>在 VM 上建置 K8S cluster 環境，有 4 核 16G 兩台，2 核 8G 一台</p>
+</li>
+<li><p>於 K8S cluster 部署 Kubeflow Spark Operator</p>
+</li>
+<li><p>於 K8S cluster 部署 minio</p>
+</li>
+</ul>
+<h1 id="生成有-data-skew-的待測資料"><a href="#生成有-data-skew-的待測資料" class="headerlink" title="生成有 data-skew 的待測資料"></a>生成有 data-skew 的待測資料</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">TOTAL_ROWS = <span class="number">250_000_000</span> <span class="comment"># 10GB 約需要 2 億到 3 億筆資料 (視壓縮率而定)</span></span><br><span class="line">SKEW_RATIO = <span class="number">0.8</span>  <span class="comment"># 80% 的資料會集中在少數幾個 material 上</span></span><br><span class="line"></span><br><span class="line">df_skewed = df.withColumn(</span><br><span class="line">    <span class="string">&quot;material&quot;</span>,</span><br><span class="line">    F.when(F.col(<span class="string">&quot;id&quot;</span>) &lt; (TOTAL_ROWS * SKEW_RATIO), <span class="string">&quot;M_0001&quot;</span>).otherwise(</span><br><span class="line">        F.concat(F.lit(<span class="string">&quot;M_&quot;</span>), F.format_string(<span class="string">&quot;%04d&quot;</span>, (F.rand() * <span class="number">10000</span>).cast(<span class="string">&quot;int&quot;</span>)))</span><br><span class="line">    ),</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">df_final = (</span><br><span class="line">    df_skewed.withColumn(<span class="string">&quot;line&quot;</span>, F.concat(F.lit(<span class="string">&quot;Line-&quot;</span>), (F.rand() * <span class="number">10</span>).cast(<span class="string">&quot;int&quot;</span>)))</span><br><span class="line">    .withColumn(<span class="string">&quot;machine&quot;</span>, F.concat(F.lit(<span class="string">&quot;MC-&quot;</span>), (F.rand() * <span class="number">50</span>).cast(<span class="string">&quot;int&quot;</span>)))</span><br><span class="line">    .withColumn(<span class="string">&quot;module&quot;</span>, F.concat(F.lit(<span class="string">&quot;MOD-&quot;</span>), (F.rand() * <span class="number">5</span>).cast(<span class="string">&quot;int&quot;</span>)))</span><br><span class="line">    .withColumn(<span class="string">&quot;slot&quot;</span>, (F.rand() * <span class="number">20</span>).cast(<span class="string">&quot;int&quot;</span>).cast(<span class="string">&quot;string&quot;</span>))</span><br><span class="line">    .withColumn(<span class="string">&quot;product&quot;</span>, F.concat(F.lit(<span class="string">&quot;PROD-&quot;</span>), (F.rand() * <span class="number">100</span>).cast(<span class="string">&quot;int&quot;</span>)))</span><br><span class="line">    .withColumn(</span><br><span class="line">        <span class="string">&quot;status&quot;</span>,</span><br><span class="line">        F.expr(</span><br><span class="line">            <span class="string">&quot;case when rand() &gt; 0.99 then &#x27;ERROR&#x27; when rand() &gt; 0.01 then &#x27;OK&#x27; else &#x27;UNKNOWN&#x27; end&quot;</span></span><br><span class="line">        ),</span><br><span class="line">    )</span><br><span class="line">    .withColumn(<span class="string">&quot;count&quot;</span>, (F.rand() * <span class="number">100</span>).cast(<span class="string">&quot;int&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h1 id="驗證結果"><a href="#驗證結果" class="headerlink" title="驗證結果"></a>驗證結果</h1><h2 id="方法-1：pandas"><a href="#方法-1：pandas" class="headerlink" title="方法 1：pandas"></a>方法 1：pandas</h2><p>與 spark 設定同樣的 memory 限制條件，出現 OOMKilled<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/pandas-oomkilled.png" alt="pandas-oomkilled.png"></p>
+<h2 id="方法-2：spark"><a href="#方法-2：spark" class="headerlink" title="方法 2：spark"></a>方法 2：spark</h2><p>spark 預設的 autobroadcast 表現最好<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/spark-autobroadcast-01.png" alt="spark-autobroadcast-01.png"></p>
+<h2 id="方法-3：spark-關掉-autobroadcast"><a href="#方法-3：spark-關掉-autobroadcast" class="headerlink" title="方法 3：spark 關掉 autobroadcast"></a>方法 3：spark 關掉 autobroadcast</h2><p>memory 不足，無法完成任務<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/spark-turnoff-autobroadcast-01.png" alt="spark-turnoff-autobroadcast-01.png"><br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/spark-turnoff-autobroadcast-02.png" alt="spark-turnoff-autobroadcast-02.png"></p>
+<h2 id="方法-4：手動-salting"><a href="#方法-4：手動-salting" class="headerlink" title="方法 4：手動 salting"></a>方法 4：手動 salting</h2><p>加入 salting 可以讓數據在有限 memory 中「排隊」分批處理，完成任務<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-01.png" alt="salting-01.png"><br>任務被平均分配到 executor 執行，作業時間平均，但是出現 Memory &amp; Disk Spill<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-02.png" alt="salting-02.png"><br>如果拆成更多 partition，可以降低 Memory &amp; Disk Spill，比如切成 400<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-03.png" alt="salting-03.png"><br>增加 memory 到 5G，沒有 Memory &amp; Disk Spill<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-04.png" alt="salting-04.png"><br>但實際作業時間變長<br><img src="/images/%E4%BD%BF%E7%94%A8-panda%E3%80%81spark%E3%80%81salting%E3%80%81autobroadcast-%E8%99%95%E7%90%86-50GB-%E5%A4%A7%E6%95%B8%E6%93%9A%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C%E6%AF%94%E8%BC%83/salting-05.png" alt="salting-05.png"></p>
+<p>程式碼 repo：yuchun33&#x2F;data-skew-exp</p>
+<p>DONE.</p>
+
       
     </div>
 
